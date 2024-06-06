@@ -17,9 +17,17 @@ nano /usr/lib/systemd/system/gsad.service
 Change the value of the `--listen` argument to `0.0.0.0` and optionally change the value of `--port` to the standard SSL/TLS port 443:
 
 ```diff
--ExecStart=/usr/local/sbin/gsad --foreground --listen=127.0.0.1 --port=9392
-+ExecStart=/usr/local/sbin/gsad --foreground --listen=0.0.0.0 --port=443
+-ExecStart=/usr/sbin/gsad --foreground --listen=127.0.0.1 --port=9392
++ExecStart=/usr/sbin/gsad --foreground --listen=0.0.0.0 --port=443
 ```
+
+To listen on both IPv4 and IPv6, change the `--listen` argument to `::`
+
+```diff
+-ExecStart=/usr/sbin/gsad --foreground --listen=127.0.0.1 --port=9392
++ExecStart=/usr/sbin/gsad --foreground --listen :: --port 443
+```
+
 Restart the `gsad` service:
 ```{code-block}
 sudo systemctl daemon-reload
